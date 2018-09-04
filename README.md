@@ -1,5 +1,5 @@
 Scops:
- - We are a online leanguages company (http://myngle.com) so we need BigBlueButton for our virtual class room
+ - We are a online languages school company (http://myngle.com) so we need BigBlueButton for our virtual class room
  - Each teacher have their own courses, each course has some presentation files (we called it is slides).
  - Every time teacher open BBB for a class, our system already know which course should be used and which slides should be pre-loaded.
  - So we have a folder to stored all slides for all teacher and their lessons, when teacher open BigBlueButton, it will load all slides for that lesson without ask teacher to re-upload them. Or system also don't have to reupload them by use pre-uploaded presentation.
