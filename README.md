@@ -1,3 +1,12 @@
+New custom feature:
+
+- Add new rebuild script to build and deploy BBB's custom code
+- Add the external room ID at the end of internal room id, it is used to help other module can know which is external room id and take thecorrect slide for that room
+- Change upload slide code to keep the original uploaded file name at begining of the file hash, so we can more easy to check it on hardisk
+- Add new WebrtcModule on BBB-client to allow us to intergrate external Video/Audio into BBB. It will be intergrated inside an iframe
+
+Contact me at truong@chuongduong.net if you need more information.
+
 BigBlueButton
 =============
 BigBlueButton is an open source web conferencing system.  
