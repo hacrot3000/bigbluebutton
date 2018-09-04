@@ -3,8 +3,8 @@ Scops:
  - Each teacher have their own courses, each course has some presentation files (we called it is slides).
  - Every time teacher open BBB for a class, our system already know which course should be used and which slides should be pre-loaded.
  - So we have a folder to stored all slides for all teacher and their lessons, when teacher open BigBlueButton, it will load all slides for that lesson without ask teacher to re-upload them. Or system also don't have to reupload them by use pre-uploaded presentation.
- - The folder structure is: /var/bigbluebutton/&lt;lessonsId&gt;/Preloaded/&lt;presentation id&gt;/
- - They 99% same with the original BBB folder structure except the &lt;lessonsId&gt; is now ExternalID - the number we sent when create the rom via API. Original BBB use internal room id for that, it is a unique hash string for each class room.
+ - The folder structure is: /var/bigbluebutton/<b>&lt;lessonsId&gt;</b>/Preloaded/&lt;presentation id&gt;/
+ - They 99% same with the original BBB folder structure except the <b>&lt;lessonsId&gt;</b> is now ExternalID - the number we sent when create the room via API. Original BBB use internal room id for that, it is a unique hash string for each class room.
  
  So we did new custom features:
 
