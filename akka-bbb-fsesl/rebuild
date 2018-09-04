@@ -1,0 +1,12 @@
+#!/bin/sh
+sudo systemctl stop bbb-fsesl-akka && \
+cd ~/dev/bigbluebutton/bbb-fsesl-client && \
+sbt clean && \
+sbt publish publishLocal && \
+cd ~/dev/bigbluebutton/akka-bbb-fsesl && \
+sbt clean && \
+sbt debian:packageBin && \
+sudo dpkg -i target/*.deb && \
+sudo systemctl start bbb-fsesl-akka && \
+echo "----Done----"
+

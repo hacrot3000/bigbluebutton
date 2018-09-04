@@ -1,0 +1,7 @@
+#!/bin/sh
+cd ~/dev/bigbluebutton/bbb-voice && \
+sudo systemctl stop bbb-red5  && \
+gradle resolveDeps && \
+gradle war deploy && \
+sudo systemctl start bbb-red5 && \
+echo "----Done----"

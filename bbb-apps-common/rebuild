@@ -1,0 +1,7 @@
+sudo systemctl stop red5 && \
+cd ~/dev/bigbluebutton/bbb-apps-common && \
+sbt clean && \
+sbt publish publishLocal && \
+cd ~/dev/bigbluebutton/bigbluebutton-apps && \
+./deploy.sh && \
+sudo systemctl start red5

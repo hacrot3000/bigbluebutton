@@ -1,0 +1,10 @@
+#!/bin/sh
+sudo systemctl stop bbb-apps-akka
+cd ~/dev/bigbluebutton/akka-bbb-apps
+svn up ..
+sbt clean
+sbt debian:packageBin && \
+sudo dpkg -i target/*.deb && \
+sudo systemctl start bbb-apps-akka && \
+sudo systemctl enable bbb-apps-akka.service && \
+echo "----Done----"

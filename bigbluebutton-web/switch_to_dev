@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo ln -s -f /etc/bigbluebutton/nginx/web_dev /etc/bigbluebutton/nginx/web.nginx
+sudo /etc/init.d/nginx restart

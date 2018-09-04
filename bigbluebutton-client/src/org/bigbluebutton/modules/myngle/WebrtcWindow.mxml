@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<CustomMdiWindow xmlns="org.bigbluebutton.common.*"
+                 xmlns:mx="library://ns.adobe.com/flex/mx"
+                 xmlns:fx="http://ns.adobe.com/mxml/2009"
+                 xmlns:flexiframe="com.google.code.flexiframe.*"
+                 xmlns:mate="http://mate.asfusion.com/"
+                 xmlns:s="library://ns.adobe.com/flex/spark"
+                 implements="org.bigbluebutton.common.IBbbModuleWindow"
+                 creationComplete="onCreationComplete()"
+                 label="Webrtc Window" layout="vertical"
+                 title = "Join Audio"
+
+                 visible="true"
+                 showCloseButton="false"
+                 horizontalAlign="center"
+                 verticalAlign="middle"
+                 horizontalScrollPolicy="off"
+                 verticalScrollPolicy="off">
+<!--                  width="237" height="159"
+-->
+    <fx:Script>
+		<![CDATA[
+            import org.as3commons.logging.api.ILogger;
+            import org.as3commons.logging.api.getClassLogger;
+			import org.bigbluebutton.main.views.MainCanvas;
+            
+            private static const LOGGER:ILogger = getClassLogger(WebrtcModule);
+
+            public var moduleAttributes:Object;
+
+			private function onCreationComplete():void{
+                LOGGER.info("WebrtcModule::loading " + moduleAttributes.uri);
+                //iFrameBySource.adjustPosition(true);
+                iFrameBySource.source = moduleAttributes.uri;
+                iFrameBySource.scrollPolicy = moduleAttributes.scrollPolicy;
+                this.title =  moduleAttributes.title;
+			}
+
+
+			public function getPrefferedPosition():String{
+				return MainCanvas.POPUP;
+			}
+
+		]]>
+    </fx:Script>
+    <flexiframe:IFrame id="iFrameBySource"
+                       width="99%"
+                       height="99%"
+                       source=""
+                       scrollPolicy="no"
+    />
+
+    <!--
+    <mx:TextInput enabled="false" text="disabled MX"/>
+    <mx:TextInput enabled="true" text="enabled MX"/>
+
+    <s:TextInput enabled="false" text="disabled Spark"/>
+    <s:TextInput enabled="true" text="enabled Spark"/>
+    -->
+</CustomMdiWindow>

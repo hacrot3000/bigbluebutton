@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd ~/dev/bigbluebutton/bbb-common-message
+source ~/.profile
+
+./deploy.sh
+

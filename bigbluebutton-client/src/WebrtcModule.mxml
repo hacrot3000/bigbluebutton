@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute"
+		   xmlns:fx="http://ns.adobe.com/mxml/2009"
+		   implements="org.bigbluebutton.common.IBigBlueButtonModule"
+		   xmlns:myngle="org.bigbluebutton.modules.myngle.*">
+	<fx:Script>
+		<![CDATA[
+			import com.asfusion.mate.events.Dispatcher;
+
+			import org.as3commons.logging.api.ILogger;
+			import org.as3commons.logging.api.getClassLogger;
+			import org.bigbluebutton.common.IBigBlueButtonModule;
+			import org.bigbluebutton.common.events.OpenWindowEvent;
+			import org.bigbluebutton.modules.myngle.WebrtcWindow;
+
+
+			private static const LOGGER:ILogger = getClassLogger(WebrtcModule);
+
+			private var _moduleName:String = "WebrtcModule";
+			private var _attributes:Object;
+
+			public var globalDispatcher:Dispatcher = new Dispatcher();
+
+			private function init():void{
+				LOGGER.debug("WebrtcModule::init");
+			}
+
+			public function get moduleName():String {
+				return _moduleName;
+			}
+
+			public function get uri():String {
+				if (_attributes.mode == "PLAYBACK") {
+					return _attributes.uri + "/" + _attributes.playbackRoom;
+				}
+
+				return _attributes.uri + "/" + _attributes.room;
+			}
+
+            /*
+			public function get username():String {
+				return _attributes.username;
+			}
+
+			public function get userid():Number {
+				return _attributes.userid as Number;
+			}
+
+			public function get role():String {
+				return _attributes.userrole as String;
+			}
+
+			public function get connection():NetConnection {
+				return _attributes.connection;
+			}
+
+			public function get mode():String {
+				if (_attributes.mode == null) {
+					//_attributes.mode = "PLAYBACK"
+					_attributes.mode = "LIVE"
+					LOGGER.debug('Setting WebrtcModule mode: ' + _attributes.mode);
+				}
+				LOGGER.debug('WebrtcModule mode: ' + _attributes.mode);
+				return _attributes.mode;
+			}
+            /**/
+
+			public function start(attributes:Object):void {
+                LOGGER.debug("WebrtcModule::start");
+
+				this._attributes = attributes;
+				var window:WebrtcWindow = new WebrtcWindow
+				window.moduleAttributes = _attributes;
+				var event:OpenWindowEvent = new OpenWindowEvent(OpenWindowEvent.OPEN_WINDOW_EVENT);
+				event.window = window;
+				globalDispatcher.dispatchEvent(event);
+
+			}
+
+			public function stop():void {
+                LOGGER.debug("WebrtcModule::stop");
+			}
+		]]>
+	</fx:Script>
+
+</mx:Module>

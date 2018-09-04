@@ -1,0 +1,3 @@
+ant locales && \
+ant && \
+sudo bbb-conf --clean

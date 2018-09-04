@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd ~/dev/bigbluebutton/bbb-common-web && \
+./deploy.sh && \
+cd ~/dev/bigbluebutton/bigbluebutton-web && \
+./build.sh && \
+grails war && \
+sudo cp target/bigbluebutton-0.9.0.war /var/lib/tomcat7/webapps/bigbluebutton.war && \
+sudo systemctl restart tomcat7  && \
+echo "----DONE-----"
+

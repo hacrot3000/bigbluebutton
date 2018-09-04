@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.module.flexbean.project</type>
+    <configuration>
+        <data xmlns="http://sourceforge.net/projects/flexbean/ns/flex-project/public/1">
+            <name>bigbluebutton-client</name>
+            <source>src</source>
+        </data>
+    </configuration>
+</project>

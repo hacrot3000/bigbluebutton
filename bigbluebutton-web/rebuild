@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#source ~/.profile
+cd ~/dev/bigbluebutton/bbb-common-web && \
+svn up .. && \
+./deploy.sh && \
+cd ~/dev/bigbluebutton/bigbluebutton-web && \
+svn up .. && \
+./build.sh && \
+sudo chmod 777 /var/log/bigbluebutton/bbb-web.log && \
+grails war && \
+sudo systemctl stop tomcat7 && \
+sudo rm -fr /var/lib/tomcat7/webapps/bigbluebutton.war /var/lib/tomcat7/webapps/bigbluebutton && \
+sudo cp target/bigbluebutton-0.9.0.war /var/lib/tomcat7/webapps/bigbluebutton.war && \
+sudo systemctl restart tomcat7 
+
