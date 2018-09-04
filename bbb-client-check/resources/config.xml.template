@@ -10,35 +10,35 @@
 	<rtmpapps>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmpBigBlueButton</name>
-			<uri>rtmp://HOST/bigbluebutton</uri>
+			<uri>rtmp://172.104.233.62/bigbluebutton</uri>
 		</app>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmpDeskshare</name>
-			<uri>rtmp://HOST/screenshare</uri>
+			<uri>rtmp://172.104.233.62/screenshare</uri>
 		</app>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmpVideo</name>
-			<uri>rtmp://HOST/video</uri>
+			<uri>rtmp://172.104.233.62/video</uri>
 		</app>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmpSip</name>
-			<uri>rtmp://HOST/sip</uri>
+			<uri>rtmp://172.104.233.62/sip</uri>
 		</app>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmptBigBlueButton</name>
-			<uri>rtmpt://HOST/bigbluebutton</uri>
+			<uri>rtmpt://172.104.233.62/bigbluebutton</uri>
 		</app>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmptDeskshare</name>
-			<uri>rtmpt://HOST/screenshare</uri>
+			<uri>rtmpt://172.104.233.62/screenshare</uri>
 		</app>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmptVideo</name>
-			<uri>rtmpt://HOST/video</uri>
+			<uri>rtmpt://172.104.233.62/video</uri>
 		</app>
 		<app>
 			<name>bbbsystemcheck.test.name.rtmptSip</name>
-			<uri>rtmpt://HOST/sip</uri>
+			<uri>rtmpt://172.104.233.62/sip</uri>
 		</app>
 	</rtmpapps>
 </config>

@@ -43,6 +43,11 @@ object MeetingActor {
     liveMeeting: LiveMeeting
   ): Props =
     Props(classOf[MeetingActor], props, eventBus, outGW, liveMeeting)
+
+  //DuongTC: Added load existing presentations on hard disk
+  var liveMeeting = None: Option[LiveMeeting]
+  var mettingId = ""
+  //DuongTC: END Added load existing presentations on hard disk
 }
 
 class MeetingActor(
@@ -106,6 +111,11 @@ class MeetingActor(
   val sharedNotesApp2x = new SharedNotesApp2x(liveMeeting, outGW)
   val chatApp2x = new ChatApp2x(liveMeeting, outGW)
   val usersApp = new UsersApp(liveMeeting, outGW, eventBus)
+
+  //DuongTC: Added load existing presentations on hard disk
+  MeetingActor.liveMeeting = Some(liveMeeting)
+  MeetingActor.mettingId = liveMeeting.props.meetingProp.intId
+  //DuongTC: END Added load existing presentations on hard disk
 
   object ExpiryTrackerHelper extends MeetingExpiryTrackerHelper
 

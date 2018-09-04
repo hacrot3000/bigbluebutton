@@ -1835,8 +1835,18 @@ class ApiController {
     requestBody = StringUtils.isEmpty(requestBody) ? null : requestBody;
 
     if (requestBody == null) {
-      downloadAndProcessDocument(presentationService.defaultUploadedPresentation, conf.getInternalId(),
+        //DuongTC: Not upload duplicate default slide
+        def externalMeetingId = params.meetingID;
+
+        def file = new File(presentationService.getPresentationDir() + externalMeetingId + "/Preloaded/default-slide/default-slide.pdf");
+
+        if (!file.exists())
+        {
+        //DuongTC: END Not upload duplicate default slide
+        
+        downloadAndProcessDocument(presentationService.defaultUploadedPresentation, conf.getInternalId(),
               true /* default presentation */ );
+        }
     } else {
       log.debug "Request body: \n" + requestBody;
       def xml = new XmlSlurper().parseText(requestBody);

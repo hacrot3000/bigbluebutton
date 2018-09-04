@@ -1,13 +1,13 @@
 /**
 * BigBlueButton open source conferencing system - http://www.bigbluebutton.org/
-* 
+*
 * Copyright (c) 2012 BigBlueButton Inc. and by respective authors (see below).
 *
 * This program is free software; you can redistribute it and/or modify it under the
 * terms of the GNU Lesser General Public License as published by the Free Software
 * Foundation; either version 3.0 of the License, or (at your option) any later
 * version.
-* 
+*
 * BigBlueButton is distributed in the hope that it will be useful, but WITHOUT ANY
 * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
@@ -50,6 +50,7 @@ import org.bigbluebutton.api.domain.Meeting;
 import org.bigbluebutton.api.util.ParamsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.text.Normalizer;
 
 public class ParamsProcessorUtil {
     private static Logger log = LoggerFactory.getLogger(ParamsProcessorUtil.class);
@@ -140,62 +141,62 @@ public class ParamsProcessorUtil {
 
 	public void updateMeeting(Map<String, Object> updateParams, Meeting existing) {
 		// TODO: Assign new values to meeting.
-/*	    
+/*
 	    String meetingName = (String) updateParams.get("name");
 	    if (meetingName != null) {
 	    	existing.setM("name", meetingName);
 	    }
-	    	    
+
 	    String viewerPass = params.get("attendeePW");
 	    if (! StringUtils.isEmpty(viewerPass) ) {
 	    	newParams.put("attendeePW", viewerPass);
 	    }
-	    
-	    String modPass = params.get("moderatorPW"); 
+
+	    String modPass = params.get("moderatorPW");
 	    if (! StringUtils.isEmpty(modPass) ) {
 	    	newParams.put("moderatorPW", modPass);
 	    }
-	    
+
 	    String telVoice = params.get("voiceBridge");
 	    if (! StringUtils.isEmpty(telVoice) ) {
 	    	newParams.put("voiceBridge", telVoice);
-	    }	    
-	    
+	    }
+
 	    String webVoice = params.get("webVoice");
 	    if (! StringUtils.isEmpty(webVoice)) {
 	    	newParams.put("webVoice", webVoice);
 	    }
-	    
+
 	    String dialNumber = params.get("dialNumber");
 	    if (! StringUtils.isEmpty(dialNumber)) {
 	    	newParams.put("dialNumber", dialNumber);
-	    }	    
-	    
-	    String logoutUrl = params.get("logoutURL"); 
+	    }
+
+	    String logoutUrl = params.get("logoutURL");
 	    if (! StringUtils.isEmpty(logoutUrl)) {
 	    	newParams.put("logoutURL", logoutUrl);
-	    }	
-	    
+	    }
+
 	    String record = params.get("record");
 	    if (! StringUtils.isEmpty(record)) {
 	    	newParams.put("record", record);
-	    }	
-	    
+	    }
+
 	    String maxUsers = params.get("maxParticipants");
 	    if (! StringUtils.isEmpty(maxUsers)) {
 	    	newParams.put("maxParticipants", maxUsers);
-	    }	
-	    
+	    }
+
 	    String meetingDuration = params.get("duration");
 	    if (! StringUtils.isEmpty(meetingDuration)) {
 	    	newParams.put("duration", meetingDuration);
 	    }
-	    
+
 	    String welcomeMessage = params.get("welcome");
 	    if (! StringUtils.isEmpty(welcomeMessage)) {
 	    	newParams.put("welcome", welcomeMessage);
 	    }
-	    	    	    
+
 	    // Collect metadata for this meeting that the third-party app wants to store if meeting is recorded.
 	    Map<String, String> meetingInfo = new HashMap<String, String>();
 	    for (String key: params.keySet()) {
@@ -204,74 +205,74 @@ public class ParamsProcessorUtil {
 			    if(meta.length == 2){
 			    	meetingInfo.put(meta[1], params.get(key));
 			    }
-			}   
+			}
 	    }
 
 	    if (! meetingInfo.isEmpty()) {
 	    	newParams.put("metadata", meetingInfo);
-	    }		
+	    }
 */
 	}
-	
+
 	public Map<String, Object> processUpdateCreateParams(Map<String, String> params) {
 		Map<String, Object> newParams = new HashMap<String, Object>();
-		    
+
 	    // Do we have a meeting name? If not, complain.
 	    String meetingName = params.get("name");
 	    if (! StringUtils.isEmpty(meetingName) ) {
 	    	newParams.put("name", meetingName);
 	    }
-	    	    
+
 	    String viewerPass = params.get("attendeePW");
 	    if (! StringUtils.isEmpty(viewerPass) ) {
 	    	newParams.put("attendeePW", viewerPass);
 	    }
-	    
-	    String modPass = params.get("moderatorPW"); 
+
+	    String modPass = params.get("moderatorPW");
 	    if (! StringUtils.isEmpty(modPass) ) {
 	    	newParams.put("moderatorPW", modPass);
 	    }
-	    
+
 	    String telVoice = params.get("voiceBridge");
 	    if (! StringUtils.isEmpty(telVoice) ) {
 	    	newParams.put("voiceBridge", telVoice);
-	    }	    
-	    
+	    }
+
 	    String webVoice = params.get("webVoice");
 	    if (! StringUtils.isEmpty(webVoice)) {
 	    	newParams.put("webVoice", webVoice);
 	    }
-	    
+
 	    String dialNumber = params.get("dialNumber");
 	    if (! StringUtils.isEmpty(dialNumber)) {
 	    	newParams.put("dialNumber", dialNumber);
-	    }	    
-	    
-	    String logoutUrl = params.get("logoutURL"); 
+	    }
+
+	    String logoutUrl = params.get("logoutURL");
 	    if (! StringUtils.isEmpty(logoutUrl)) {
 	    	newParams.put("logoutURL", logoutUrl);
-	    }	
-	    
+	    }
+
 	    String record = params.get("record");
 	    if (! StringUtils.isEmpty(record)) {
 	    	newParams.put("record", record);
-	    }	
-	    
+	    }
+
 	    String maxUsers = params.get("maxParticipants");
 	    if (! StringUtils.isEmpty(maxUsers)) {
 	    	newParams.put("maxParticipants", maxUsers);
-	    }	
-	    
+	    }
+
 	    String meetingDuration = params.get("duration");
 	    if (! StringUtils.isEmpty(meetingDuration)) {
 	    	newParams.put("duration", meetingDuration);
 	    }
-	    
+
 	    String welcomeMessage = params.get("welcome");
 	    if (! StringUtils.isEmpty(welcomeMessage)) {
 	    	newParams.put("welcome", welcomeMessage);
 	    }
-	    	    	    
+
 	    // Collect metadata for this meeting that the third-party app wants to store if meeting is recorded.
 	    Map<String, String> meetingInfo = new HashMap<String, String>();
 	    for (String key: params.keySet()) {
@@ -280,29 +281,29 @@ public class ParamsProcessorUtil {
 			    if(meta.length == 2){
 			    	meetingInfo.put(meta[1], params.get(key));
 			    }
-			}   
+			}
 	    }
 
 	    if (! meetingInfo.isEmpty()) {
 	    	newParams.put("metadata", meetingInfo);
 	    }
-	    
+
 	    return newParams;
 	}
-	
-	private static final Pattern META_VAR_PATTERN = Pattern.compile("meta_[a-zA-Z][a-zA-Z0-9-]*$");	
+
+	private static final Pattern META_VAR_PATTERN = Pattern.compile("meta_[a-zA-Z][a-zA-Z0-9-]*$");
 	public static Boolean isMetaValid(String param) {
 		Matcher metaMatcher = META_VAR_PATTERN.matcher(param);
     if (metaMatcher.matches()) {
     	return true;
-    }	
+    }
 		return false;
 	}
-	
+
 	public static String removeMetaString(String param) {
 		return StringUtils.removeStart(param, "meta_");
 	}
-	
+
 	public static Map<String, String> processMetaParam(Map<String, String> params) {
     Map<String, String> metas = new HashMap<String, String>();
     for (String key: params.keySet()) {
@@ -310,12 +311,35 @@ public class ParamsProcessorUtil {
     		// Need to lowercase to maintain backward compatibility with 0.81
     		String metaName = removeMetaString(key).toLowerCase();
     		metas.put(metaName, params.get(key));
-		  }   
+		  }
     }
-    
+
     return metas;
 	}
-	
+
+    //DuongTC: Change BBB slide folder
+    public static String flattenToAscii(String string) {
+        char[] out = new char[string.length()];
+        string = Normalizer.normalize(string, Normalizer.Form.NFD);
+        int j = 0;
+        for (int i = 0, n = string.length(); i < n; ++i) {
+            char c = string.charAt(i);
+            if (c <= '\u007F') {
+                out[j++] = c;
+            }
+        }
+        String o = new String(out);
+        o = o.replaceAll("[^0-9]", "");
+
+        if (o.length() == 0)
+        {
+            o = "21291";
+        }
+
+        return o;
+    }
+    //DuongTC: END Change BBB slide folder
+
     public Meeting processCreateParams(Map<String, String> params) {
 
         String meetingName = params.get("name");
@@ -415,7 +439,7 @@ public class ParamsProcessorUtil {
         if (!StringUtils.isEmpty(params.get("guestPolicy"))) {
         	guestPolicy = params.get("guestPolicy");
 		}
-        
+
         // Collect metadata for this meeting that the third-party app wants to
         // store if meeting is recorded.
         Map<String, String> meetingInfo = new HashMap<String, String>();
@@ -425,8 +449,15 @@ public class ParamsProcessorUtil {
         // the 3rd-party
         // app can reuse the external meeting id.
         long createTime = System.currentTimeMillis();
+        /*
         internalMeetingId = internalMeetingId.concat("-").concat(
                 new Long(createTime).toString());
+        /**/
+
+        //DuongTC: Add External metting ID for slide module
+        internalMeetingId = internalMeetingId.concat("-").concat(flattenToAscii(externalMeetingId));
+        log.warn("The new ID meeting=[{}] for externalId=[{}]", internalMeetingId, externalMeetingId);
+	//DuongTC: END Add External metting ID for slide module
 
         // If this create meeting request is for a breakout room, we just used
         // we need to generate a unique internal and external id and keep
@@ -501,15 +532,15 @@ public class ParamsProcessorUtil {
 		meeting.setMuteOnStart(muteOnStart);
         return meeting;
     }
-	
+
 	public String getApiVersion() {
 		return apiVersion;
 	}
-	
+
 	public boolean isServiceEnabled() {
 		return serviceEnabled;
 	}
-	
+
 	public String getDefaultClientUrl() {
 		return defaultClientUrl;
 	}
@@ -528,10 +559,10 @@ public class ParamsProcessorUtil {
 
 	public String getDefaultConfigXML() {
 		defaultConfigXML = getConfig(defaultConfigURL);
-		
+
 		return defaultConfigXML;
 	}
-	
+
 	private String getConfig(String url) {
 		String configXML = "";
 
@@ -569,19 +600,19 @@ public class ParamsProcessorUtil {
 
 		return configXML;
 	  }
-	
+
 	public String getDefaultConfigURL() {
 		return defaultConfigURL;
 	}
-	
+
 	public String getDefaultLogoutUrl() {
-		 if ((StringUtils.isEmpty(defaultLogoutUrl)) || defaultLogoutUrl.equalsIgnoreCase("default")) {          
+		 if ((StringUtils.isEmpty(defaultLogoutUrl)) || defaultLogoutUrl.equalsIgnoreCase("default")) {
      		return defaultServerUrl;
      	} else {
      		return defaultLogoutUrl;
      	}
 	}
-	
+
     public String processWelcomeMessage(String message, Boolean isBreakout) {
         String welcomeMessage = message;
         if (StringUtils.isEmpty(message)) {
@@ -595,7 +626,7 @@ public class ParamsProcessorUtil {
 	public String convertToInternalMeetingId(String extMeetingId) {
 		return DigestUtils.shaHex(extMeetingId);
 	}
-	
+
 	public String processPassword(String pass) {
 		return StringUtils.isEmpty(pass) ? RandomStringUtils.randomAlphanumeric(8) : pass;
 	}
@@ -603,91 +634,91 @@ public class ParamsProcessorUtil {
 	public boolean hasChecksumAndQueryString(String checksum, String queryString) {
 		return (! StringUtils.isEmpty(checksum) && StringUtils.isEmpty(queryString));
 	}
-		
+
 	public String processTelVoice(String telNum) {
 		return StringUtils.isEmpty(telNum) ? RandomStringUtils.randomNumeric(defaultNumDigitsForTelVoice) : telNum;
 	}
-		
+
 	public String processDialNumber(String dial) {
-		return StringUtils.isEmpty(dial) ? defaultDialAccessNumber : dial;	
+		return StringUtils.isEmpty(dial) ? defaultDialAccessNumber : dial;
 	}
-	
+
 	public String processLogoutUrl(String logoutUrl) {
 		if (StringUtils.isEmpty(logoutUrl)) {
-	        if ((StringUtils.isEmpty(defaultLogoutUrl)) || defaultLogoutUrl.equalsIgnoreCase("default")) {          
+	        if ((StringUtils.isEmpty(defaultLogoutUrl)) || defaultLogoutUrl.equalsIgnoreCase("default")) {
         		return defaultServerUrl;
         	} else {
         		return defaultLogoutUrl;
-        	}	
+        	}
 		}
-		
+
 		return logoutUrl;
 	}
-	
+
 	public boolean processRecordMeeting(String record) {
 		// The administrator has turned off recording for all meetings.
 		if (disableRecordingDefault) {
 			log.info("Recording is turned OFF by default.");
 			return false;
 		}
-		
-		boolean rec = false;			
+
+		boolean rec = false;
 		if(! StringUtils.isEmpty(record)){
 			try {
 				rec = Boolean.parseBoolean(record);
-			} catch(Exception ex){ 
+			} catch(Exception ex){
 				rec = false;
 			}
 		}
-		
+
 		return rec;
 	}
-		
+
 	public int processMaxUser(String maxUsers) {
 		int mUsers = -1;
-		
+
 		try {
 			mUsers = Integer.parseInt(maxUsers);
-		} catch(Exception ex) { 
+		} catch(Exception ex) {
 			mUsers = defaultMaxUsers;
-		}		
-		
+		}
+
 		return mUsers;
-	}	
+	}
 
   public int processMeetingDuration(String duration) {
     int mDuration = -1;
-    
+
     try {
       mDuration = Integer.parseInt(duration);
-    } catch(Exception ex) { 
+    } catch(Exception ex) {
       mDuration = defaultMeetingDuration;
-    }   
-    
+    }
+
     return mDuration;
-  } 
-  	
-	public boolean isTestMeeting(String telVoice) {	
-		return ((! StringUtils.isEmpty(telVoice)) && 
-				(! StringUtils.isEmpty(testVoiceBridge)) && 
-				(telVoice == testVoiceBridge));	
+  }
+
+	public boolean isTestMeeting(String telVoice) {
+		return ((! StringUtils.isEmpty(telVoice)) &&
+				(! StringUtils.isEmpty(testVoiceBridge)) &&
+				(telVoice == testVoiceBridge));
 	}
-		
-	public String getIntMeetingIdForTestMeeting(String telVoice) {		
+
+	public String getIntMeetingIdForTestMeeting(String telVoice) {
 		if ((testVoiceBridge != null) && (telVoice == testVoiceBridge)) {
-			if (StringUtils.isEmpty(testConferenceMock)) 
+			if (StringUtils.isEmpty(testConferenceMock))
 				return testConferenceMock;
-		} 
-		
-		return "";	
+		}
+
+		return "";
 	}
-	
+
 	public boolean isConfigXMLChecksumSame(String meetingID, String configXML, String checksum) {
 		if (StringUtils.isEmpty(securitySalt)) {
 			log.warn("Security is disabled in this service. Make sure this is intentional.");
 			return true;
 		}
-        
+
 		String cs = DigestUtils.shaHex(meetingID + configXML + securitySalt);
 
 		if (cs == null || cs.equals(checksum) == false) {
@@ -696,7 +727,7 @@ public class ParamsProcessorUtil {
 		}
 		return true;
 	}
-	
+
 	public boolean isChecksumSame(String apiCall, String checksum, String queryString) {
 		if (StringUtils.isEmpty(securitySalt)) {
 			log.warn("Security is disabled in this service. Make sure this is intentional.");
@@ -721,9 +752,9 @@ public class ParamsProcessorUtil {
 			return false;
 		}
 
-		return true; 
+		return true;
 	}
-	
+
 	public boolean isPostChecksumSame(String apiCall, HashMap<String, String[]> params) {
 		if (StringUtils.isEmpty(securitySalt)) {
 			log.warn("Security is disabled in this service. Make sure this is intentional.");
@@ -732,9 +763,9 @@ public class ParamsProcessorUtil {
 
 		StringBuffer csbuf = new StringBuffer();
 		csbuf.append(apiCall);
- 
+
 		SortedSet<String> keys = new TreeSet<String>(params.keySet());
- 
+
 		boolean first = true;
 		String checksum = null;
 		for (String key: keys) {
@@ -743,7 +774,7 @@ public class ParamsProcessorUtil {
 				checksum = params.get(key)[0];
 				continue;
 			}
- 
+
 			for (String value: params.get(key)) {
 				if (first) {
 					first = false;
@@ -755,26 +786,26 @@ public class ParamsProcessorUtil {
 				String encResult;
 
 				encResult = value;
-				
+
 /*****
  * Seems like Grails 2.3.6 decodes the string. So we need to re-encode it.
- * We'll remove this later. richard (aug 5, 2014)						
-*/				try {       
+ * We'll remove this later. richard (aug 5, 2014)
+*/				try {
 					// we need to re-encode the values because Grails unencoded it
 					// when it received the 'POST'ed data. Might not need to do in a GET request.
-					encResult = URLEncoder.encode(value, "UTF-8");  
-				} catch (UnsupportedEncodingException e) {       
-					encResult = value;     
-				} 					
+					encResult = URLEncoder.encode(value, "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					encResult = value;
+				}
 
 				csbuf.append(encResult);
 			}
 		}
 		csbuf.append(securitySalt);
 
-		String baseString = csbuf.toString();				
+		String baseString = csbuf.toString();
 		String cs = DigestUtils.shaHex(baseString);
-		
+
 		if (cs == null || cs.equals(checksum) == false) {
 			log.info("POST basestring = [" + baseString + "]");
 			log.info("checksumError: failed checksum. our checksum: [{}], client: [{}]", cs, checksum);
@@ -787,7 +818,7 @@ public class ParamsProcessorUtil {
 	/*************************************************
 	 * Setters
 	 ************************************************/
-	
+
 	public void setApiVersion(String apiVersion) {
 		this.apiVersion = apiVersion;
 	}
@@ -795,7 +826,7 @@ public class ParamsProcessorUtil {
 	public void setServiceEnabled(boolean e) {
 		serviceEnabled = e;
 	}
-	
+
 	public void setSecuritySalt(String securitySalt) {
 		this.securitySalt = securitySalt;
 	}
@@ -807,7 +838,7 @@ public class ParamsProcessorUtil {
 	public void setDefaultWelcomeMessage(String defaultWelcomeMessage) {
 		this.defaultWelcomeMessage = defaultWelcomeMessage;
 	}
-	
+
 	public void setDefaultWelcomeMessageFooter(String defaultWelcomeMessageFooter) {
 	    this.defaultWelcomeMessageFooter = defaultWelcomeMessageFooter;
 	}
@@ -831,7 +862,7 @@ public class ParamsProcessorUtil {
 	public void setDefaultConfigURL(String defaultConfigUrl) {
 		this.defaultConfigURL = defaultConfigUrl;
 	}
-	
+
 	public void setDefaultServerUrl(String defaultServerUrl) {
 		this.defaultServerUrl = defaultServerUrl;
 	}
@@ -863,7 +894,7 @@ public class ParamsProcessorUtil {
 	public void setDisableRecordingDefault(boolean disabled) {
 		this.disableRecordingDefault = disabled;
 	}
-	
+
 	public void setAutoStartRecording(boolean start) {
 		this.autoStartRecording = start;
 	}
@@ -871,11 +902,11 @@ public class ParamsProcessorUtil {
     public void setAllowStartStopRecording(boolean allowStartStopRecording) {
         this.allowStartStopRecording = allowStartStopRecording;
     }
-	
+
     public void setWebcamsOnlyForModerator(boolean webcamsOnlyForModerator) {
         this.webcamsOnlyForModerator = webcamsOnlyForModerator;
     }
-	
+
 	public void setdefaultAvatarURL(String url) {
 		this.defaultAvatarURL = url;
 	}
@@ -929,7 +960,7 @@ public class ParamsProcessorUtil {
 		} catch (UnsupportedEncodingException e) {
 			log.error("Couldn't decode the IDs");
 		}
-		
+
 		return ids;
 	}
 
@@ -940,7 +971,7 @@ public class ParamsProcessorUtil {
 		}
 		return internalMeetingIds;
 	}
-	
+
 	public Map<String,String> getUserCustomData(Map<String,String> params) {
 		Map<String,String> resp = new HashMap<String, String>();
 
@@ -951,7 +982,7 @@ public class ParamsProcessorUtil {
 			    	log.debug("Got user custom data {} = {}", key, params.get(key));
 			    	resp.put(userdata[1], params.get(key));
 			    }
-			}   
+			}
 	    }
 
 		return resp;

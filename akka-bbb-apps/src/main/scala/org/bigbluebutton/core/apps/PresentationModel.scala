@@ -15,6 +15,13 @@ case class Page(id: String, num: Int, thumbUri: String = "", swfUri: String,
 class PresentationModel {
   private var presentations = new scala.collection.immutable.HashMap[String, Presentation]
 
+  //DuongTC: Added load existing presentations on hard disk
+  def getNumberOfPresentations(): Int =
+    {
+      presentations.size
+    }
+  //DuongTC: END Added load existing presentations on hard disk
+
   def addPresentation(pres: Presentation) {
     savePresentation(pres)
   }

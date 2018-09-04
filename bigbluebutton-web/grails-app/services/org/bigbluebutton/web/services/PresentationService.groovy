@@ -22,8 +22,18 @@ import java.util.concurrent.*;
 import java.lang.InterruptedException
 import org.bigbluebutton.presentation.DocumentConversionService
 import org.bigbluebutton.presentation.UploadedPresentation
+//DuongTC: Change BBB slide folder
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.bigbluebutton.api.MeetingService;
+import org.bigbluebutton.api.domain.*;
+//DuongTC: End Change BBB slide folder
 
 class PresentationService {
+//DuongTC: Change BBB slide folder
+    private static Logger log = LoggerFactory.getLogger(PresentationService.class);
+    MeetingService meetingService;
+//DuongTC: END Change BBB slide folder
 
     static transactional = false
 	DocumentConversionService documentConversionService
@@ -59,18 +69,24 @@ class PresentationService {
 		directory.delete()
 	}
 
+    /*
+     * DuongTC: This function is not being used anymore
 	def listPresentations = {conf, room ->
 		def presentationsList = []
 		def directory = roomDirectory(conf, room)
-		log.debug "directory ${directory.absolutePath}"
+		log.info "listPresentations directory ${directory.absolutePath}"
 		if( directory.exists() ){
 			directory.eachFile(){ file->
 				if( file.isDirectory() )
+                {
 					presentationsList.add( file.name )
+                    log.info "found ${file.name}"
+                }
 			}
 		}
 		return presentationsList
 	}
+    /**/
 
   def getPresentationDir = {
     return presentationDir
@@ -89,12 +105,33 @@ class PresentationService {
         }
     }
 
+//DuongTC: Change BBB slide folder
 	def showSlide(String conf, String room, String presentationName, String id) {
-		new File(roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar + "slide-${id}.swf")
+        def filePath = roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar
+        def file = new File(filePath + "slide-${id}.swf")
+        if (file.exists())
+        {
+            log.debug "showSlide " + filePath + "slide-${id}.swf"
+            return file
+        }
+        else
+        {
+            int idn = id.toInteger() - 1
+            log.debug "showSlide " + filePath + "${idn}.swf"
+            return new File(filePath + "${idn}.swf")
+        }
 	}
 
 	def showSvgImage(String conf, String room, String presentationName, String id) {
-		new File(roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar + "svgs" + File.separatorChar + "slide${id}.svg")
+		def f = new File(roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar + "svgs" + File.separatorChar + "slide${id}.svg")
+        if (f.exists())
+        {
+            return f
+        }
+        else
+        {
+            return new File(getPresentationDir() + "globalblank/slide.svg")
+        }
 	}
 
 	def showPresentation = {conf, room, filename ->
@@ -106,16 +143,33 @@ class PresentationService {
 					"thumbnails" + File.separatorChar + "thumb-${thumb}.png"
 		log.debug "showing $thumbFile"
 
-		new File(thumbFile)
+		def f = new File(thumbFile)
+        if (f.exists())
+        {
+            return f
+        }
+        else
+        {
+            return new File(getPresentationDir() + "globalblank/thumb.png")
+        }
 	}
 
 	def showTextfile = {conf, room, presentationName, textfile ->
 		def txt = roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar +
 					"textfiles" + File.separatorChar + "slide-${textfile}.txt"
 		log.debug "showing $txt"
-		
-		new File(txt)
+
+		def f = new File(txt)
+        if (f.exists())
+        {
+            return f
+        }
+        else
+        {
+            return new File(getPresentationDir() + "globalblank/slide.txt")
+        }
 	}
+//DuongTC: END Change BBB slide folder
 
 	def numberOfThumbnails = {conf, room, name ->
 		def thumbDir = new File(roomDirectory(conf, room).absolutePath + File.separatorChar + name + File.separatorChar + "thumbnails")
@@ -134,29 +188,40 @@ class PresentationService {
 	}
 
   def roomDirectory = {conf, room ->
-      return new File(presentationDir + File.separatorChar + conf + File.separatorChar + room)
+      //DuongTC: Change BBB slide folder
+      Meeting meeting = meetingService.getMeeting(room);
+      String externalMeetingId = meeting.getExternalId();
+      String finalExternalMeetingId = externalMeetingId.replaceAll("[^0-9]", "");
+      if (finalExternalMeetingId.length() == 0)
+      {
+          finalExternalMeetingId = "21291";
+      }
+
+      log.debug "roomDirectory for presentationDir: " + presentationDir + " conf: " + conf + " room: " + room + " externalMeetingId: " + externalMeetingId + " with number finalExternalMeetingId:" + finalExternalMeetingId;
+      return new File(presentationDir + File.separatorChar + finalExternalMeetingId + File.separatorChar + "Preloaded")
+      //DuongTC: END Change BBB slide folder
   }
 
 	def testConversionProcess() {
 		File presDir = new File(roomDirectory(testConferenceMock, testRoomMock).absolutePath + File.separatorChar + testPresentationName)
-		
+
 		if (presDir.exists()) {
 			File pres = new File(presDir.getAbsolutePath() + File.separatorChar + testUploadedPresentation)
 			if (pres.exists()) {
 				UploadedPresentation uploadedPres = new UploadedPresentation(testConferenceMock, testRoomMock, testPresentationName);
 				uploadedPres.setUploadedFile(pres);
 				// Run conversion on another thread.
-				new Timer().runAfter(1000) 
+				new Timer().runAfter(1000)
 				{
 					documentConversionService.processDocument(uploadedPres)
 				}
 			} else {
 				log.error "${pres.absolutePath} does NOT exist"
-			}			
+			}
 		} else {
 			log.error "${presDir.absolutePath} does NOT exist."
 		}
-		
+
 	}
 
 	def getFile = {conf, room, presentationName ->

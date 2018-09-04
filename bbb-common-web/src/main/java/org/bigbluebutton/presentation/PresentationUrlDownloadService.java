@@ -24,8 +24,10 @@ import org.apache.http.nio.client.methods.HttpAsyncMethods;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.bigbluebutton.api.Util;
+import org.bigbluebutton.api.domain.Meeting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.bigbluebutton.api.MeetingService;
 
 public class PresentationUrlDownloadService {
     private static Logger log = LoggerFactory
@@ -37,6 +39,9 @@ public class PresentationUrlDownloadService {
     private String presentationBaseURL;
     private String presentationDir;
     private String BLANK_PRESENTATION;
+
+    //DuongTC: added
+    MeetingService meetingService;
 
     private ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(3);
 
@@ -83,10 +88,22 @@ public class PresentationUrlDownloadService {
     private void extractPage(final String sourceMeetingId, final String presentationId,
                              final Integer presentationSlide, final String destinationMeetingId) {
 
-        // Build the source meeting path
-        File sourceMeetingPath = new File(presentationDir + File.separator
-                + sourceMeetingId + File.separator + sourceMeetingId
+        //DuongTC: Change BBB slide folder
+        /*
+        Meeting meeting = meetingService.getMeeting(meetingId);
+        String externalMeetingId = meeting.getExternalId();
+        */
+        String[] parts = sourceMeetingId.split("-");
+        String externalMeetingId = parts[parts.length - 1];
+        String meetingPath = presentationDir + File.separatorChar + externalMeetingId + File.separatorChar + "Preloaded";
+
+        log.debug("createPresentationDirectory for presentationDir: " + presentationDir + " meetingId: " + sourceMeetingId + " presentationId: " + presentationId + " meetingPath: " + meetingPath);
+
+        //Build the source meeting path
+        File sourceMeetingPath = new File(meetingPath
                 + File.separator + presentationId);
+
+        //DuongTC: END Change BBB slide folder
 
         // Find the source meeting presentation file
         final String presentationFilter = presentationId;
@@ -149,14 +166,28 @@ public class PresentationUrlDownloadService {
     }
 
     public String generatePresentationId(String name) {
-        long timestamp = System.currentTimeMillis();
-        return DigestUtils.shaHex(name) + "-" + timestamp;
+        //DuongTC: Change BBB slide folder
+        //long timestamp = System.currentTimeMillis();
+        return Util.generatePresentationId(name);//DigestUtils.shaHex(name) + "-" + 17484;// + "-" + timestamp;
+        //DuongTC: END Change BBB slide folder
     }
 
     public File createPresentationDirectory(String meetingId,
             String presentationDir, String presentationId) {
-        String meetingPath = presentationDir + File.separatorChar + meetingId
-                + File.separatorChar + meetingId;
+
+        //DuongTC: Change BBB slide folder
+        /*
+        Meeting meeting = meetingService.getMeeting(meetingId);
+        String externalMeetingId = meeting.getExternalId();
+        */
+        String[] parts = meetingId.split("-");
+        String externalMeetingId = parts[parts.length - 1];
+        String meetingPath = presentationDir + File.separatorChar + externalMeetingId + File.separatorChar + "Preloaded";
+
+        log.debug("createPresentationDirectory for presentationDir: " + presentationDir + " meetingId: " + meetingId + " presentationId: " + presentationId + " meetingPath: " + meetingPath);
+        //DuongTC: END Change BBB slide folder
+
+
         String presPath = meetingPath + File.separatorChar + presentationId;
         File dir = new File(presPath);
         log.debug("Creating dir [{}]", presPath);

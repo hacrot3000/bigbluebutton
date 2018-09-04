@@ -268,9 +268,9 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 			
 			private function updateCopyrightText():void {
 				if (StringUtils.isEmpty(brandingOptions.copyright)) {
-					copyrightText = ResourceUtil.getInstance().getString('bbb.mainshell.copyrightLabel2',[appVersion]);
+					copyrightText = "";//ResourceUtil.getInstance().getString('bbb.mainshell.copyrightLabel2',[appVersion]);
 				} else {
-					copyrightText = String(brandingOptions.copyright).replace("{0}", appVersion);
+					copyrightText = "";//String(brandingOptions.copyright).replace("{0}", appVersion);
 				}
 				
 				if (!StringUtils.isEmpty(LiveMeeting.inst().meeting.customCopyright)) {
@@ -289,7 +289,8 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 			protected function initializeShell():void {	
 				globalDispatcher = new Dispatcher();
 
-				copyrightLabel2.addEventListener(FlexEvent.UPDATE_COMPLETE, updateCopyrightLabelDimensions);
+				//DuongTC: Remove copyright label
+				//copyrightLabel2.addEventListener(FlexEvent.UPDATE_COMPLETE, updateCopyrightLabelDimensions);
 			}
 			
 			// See this stackoverflow post for an explanation on why the size watching is done this way, https://stackoverflow.com/a/2141223
@@ -338,10 +339,11 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 			private function updateCopyrightLabelDimensions(e:Event = null):void {
 				var appWidth:Number = parentApplication.width;
 				
+				//DuongTC: Remove copyright label
 				if (spacer.width == 0) {
-					copyrightLabel2.width += (appWidth - controlBar.width);
+					emptyLabel.width += (appWidth - controlBar.width);
 				} else {
-					copyrightLabel2.width += Math.min(spacer.width, copyrightLabel2.measuredWidth - copyrightLabel2.width);
+					emptyLabel.width += Math.min(spacer.width, emptyLabel.measuredWidth - emptyLabel.width);
 				}
 			}
 
@@ -573,12 +575,12 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
                 logData.tags = ["locale"];
                 logData.logCode = "locale_loaded";
                 LOGGER.info(JSON.stringify(logData));
-                    
+                   /* DuongTC: Remove wrong locate version messages
 				if ((version == "old-locales") || StringUtils.isEmpty(version)) {
 					wrongLocaleVersion();
 				} else {
 					if (version != localeVersion) wrongLocaleVersion();
-				}	   			
+				}/**/	   			
 	   		}
 
 			private function handleInactivityWarningEvent(e:BBBEvent):void {
@@ -931,9 +933,9 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 	
 	<mx:ControlBar width="100%" height="{footerHeight}" styleName="defaultControlBarStyle" id="controlBar" paddingTop="2" paddingBottom="2" verticalAlign="middle" visible="{_showFooter}" includeInLayout="{showFooterOpt}" >
 		<mx:Label
-				htmlText="{copyrightText}"
-				link="onFooterLinkClicked(event)"
-				id="copyrightLabel2" truncateToFit="true"
+				htmlText=""
+				id="emptyLabel" truncateToFit="true"
+                visible="false" includeInLayout="false"
 				selectable="true" paddingRight="10"/>
 		<mx:Spacer width="100%" id="spacer" />
     <!--mx:Label 
