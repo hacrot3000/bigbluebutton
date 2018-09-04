@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git fetch upstream && \
+git checkout v2.0.x-release && \
+git merge upstream/v2.0.x-release && \
+git push
