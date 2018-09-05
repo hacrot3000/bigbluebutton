@@ -10,7 +10,8 @@ Scops:
 
 - Add the external room ID at the end of internal room id, it is used to help other module can know which is external room id and take the correct slide for that room. The room ID is now &lt;HASH&gt;-&lt;lessonsId&gt;, such as: 86f34d9799f9e6741b50dac37a9093357d772032-6924695.
 - Change upload slide code to keep the original uploaded file name at begining of the file hash, so we can more easy to check it on hard disk.
- - Remove duplicate default slides: By default, BBB copy the default.pdf every time we create new room via API, so our slides folder "/var/bigbluebutton/&lt;lessonsId&gt;/Preloaded" will have lot of duplicate of default.pdf. We corrected that issue so BBB is now only create default-slide for new teacher/course.
+- Remove duplicate default slides: By default, BBB copy the default.pdf every time we create new room via API, so our slides folder "/var/bigbluebutton/&lt;lessonsId&gt;/Preloaded" will have lot of duplicate of default.pdf. We corrected that issue so BBB is now only create default-slide for new teacher/course.
+- Remove the "delete presentation" button on the upload list to avoid teacher delete their course's resource.
 - Add new WebrtcModule on BBB-client to allow us to intergrate external Video/Audio into BBB. It will be intergrated inside an iframe.
  
  We also did:
