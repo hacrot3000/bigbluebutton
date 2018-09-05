@@ -73,7 +73,7 @@
 		]]>
 	</fx:Script>
 	<mx:Label id="presentationNameLabel"
-			  width="{this.width-downloadButton.width-showBtn.width-deleteBtn.width-50}"
+			  width="{this.width-downloadButton.width-showBtn.width-50}"
 			  truncateToFit="true"
 			  styleName="presentationNameLabel"
 			  text="{data.name as String}" />
@@ -90,11 +90,12 @@
 			   styleName="presentationUploadShowButtonStyle"
 			   click="showPresentation()"
 			   enabled="{!data.current}" />
+    <!--
 	<mx:Button id="deleteBtn"
 			   height="32"
 			   toolTip="{ResourceUtil.getInstance().getString('bbb.fileupload.deleteBtn.toolTip')}"
 			   styleName="presentationUploadDeleteButtonStyle"
 			   click="deletePresentation()"
 			   visible="{String(data.name) != 'default.pdf'}" />
-
+               -->
 </mx:HBox>
