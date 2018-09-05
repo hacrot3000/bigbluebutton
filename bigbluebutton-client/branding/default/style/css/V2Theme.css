@@ -173,9 +173,10 @@ phonecomponents|MuteMeButton {
 }
 
 .meetingNameLabelStyle {
-	fontSize  : 14;
-	textAlign : left;
-	color     : #2A2D33;
+	fontSize   : 15;
+	textAlign  : left;
+	color      : #FFFFFF;
+    font-weight: bold;
 }
 
 .defaultControlBarStyle {

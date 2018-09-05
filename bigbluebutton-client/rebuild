@@ -1,3 +1,5 @@
-ant locales && \
+#ant locales && \
+
+svn up .. && \
 ant && \
 sudo bbb-conf --clean
