@@ -17,6 +17,8 @@ Scops:
  We also did:
 - Add new rebuild script to build and deploy BBB's custom code. It will build and deploy our custom code and overwrite the ogirinal BBB' package installation.
 
+All custom code are now on branch v2.0.x-release
+
 Contact me at truong@chuongduong.net if you need more information.
 
 BigBlueButton
