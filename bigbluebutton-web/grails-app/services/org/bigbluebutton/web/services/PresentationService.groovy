@@ -156,7 +156,10 @@ class PresentationService {
 					"thumbnails" + File.separatorChar + "thumb-${thumb}.png"
         /**/
         def filePath = roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar
-        def f = new File(filePath + "thumbnails" + File.separatorChar + "thumb-${thumb}.png")
+
+		def thumbFile = filePath + "thumbnails" + File.separatorChar + "thumb-${thumb}.png"
+
+		def f = new File(thumbFile)
 
         if (f.exists())
         {
