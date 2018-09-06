@@ -1,5 +1,5 @@
 #ant locales && \
-
+cd ~/dev/bigbluebutton/bigbluebutton-client
 svn up .. && \
 ant && \
 sudo bbb-conf --clean
