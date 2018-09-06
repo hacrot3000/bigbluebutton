@@ -135,22 +135,48 @@ class PresentationService {
 	}
 
 	def showPresentation = {conf, room, filename ->
-		new File(roomDirectory(conf, room).absolutePath + File.separatorChar + filename + File.separatorChar + "slides.swf")
+		//new File(roomDirectory(conf, room).absolutePath + File.separatorChar + filename + File.separatorChar + "slides.swf")
+        def filePath = roomDirectory(conf, room).absolutePath + File.separatorChar + filename + File.separatorChar
+        def file = new File(filePath + "slide.swf")
+        if (file.exists())
+        {
+            log.debug "showSlide " + filePath + "slide.swf"
+            return file
+        }
+        else
+        {
+            return new File(getPresentationDir() + "globalblank/slide.swf")
+        }
+
 	}
 
 	def showThumbnail = {conf, room, presentationName, thumb ->
+        /*
 		def thumbFile = roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar +
 					"thumbnails" + File.separatorChar + "thumb-${thumb}.png"
-		log.debug "showing $thumbFile"
+        /**/
+        def filePath = roomDirectory(conf, room).absolutePath + File.separatorChar + presentationName + File.separatorChar
+        def f = new File(filePath + "thumbnails" + File.separatorChar + "thumb-${thumb}.png")
 
-		def f = new File(thumbFile)
         if (f.exists())
         {
+            log.debug "showing $thumbFile"
             return f
         }
         else
         {
-            return new File(getPresentationDir() + "globalblank/thumb.png")
+            int idn = thumb.toInteger() - 1
+            log.debug "showSlide " + filePath + "${idn}.png"
+            f = new File(filePath + "${idn}.png")
+            if (f.exists())
+            {
+                return f
+            }
+            else
+            {
+
+                return new File(getPresentationDir() + "globalblank/thumb.png")
+            }
         }
 	}
 
