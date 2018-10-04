@@ -5,7 +5,6 @@ cd ~/dev/bigbluebutton/bbb-common-web && \
 svn up .. && \
 ./deploy.sh && \
 cd ~/dev/bigbluebutton/bigbluebutton-web && \
-svn up .. && \
 ./build.sh && \
 sudo chmod 777 /var/log/bigbluebutton/bbb-web.log && \
 grails war && \

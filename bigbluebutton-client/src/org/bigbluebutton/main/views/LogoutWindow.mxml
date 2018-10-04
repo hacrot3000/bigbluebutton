@@ -34,7 +34,7 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
   <fx:Script>
     <![CDATA[
 		import com.asfusion.mate.events.Dispatcher;
-		
+
 		import org.as3commons.logging.api.ILogger;
 		import org.as3commons.logging.api.getClassLogger;
 		import org.bigbluebutton.core.PopUpUtil;
@@ -44,12 +44,13 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 		import org.bigbluebutton.util.i18n.ResourceUtil;
 
       private static const LOGGER:ILogger = getClassLogger(LogoutWindow);
-      
+
       private var globalDispatcher:Dispatcher = new Dispatcher();;
 
       private function onCreationComplete():void {
         cancelButton.setFocus();
         endMeetingButton.visible = endMeetingButton.includeInLayout = UsersUtil.amIModerator() && !UsersUtil.isBreakout();
+        confimButton.visible = !endMeetingButton.visible;
       }
 
       private function endMeetingClickHandler():void {
@@ -78,13 +79,14 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 	<common:AdvancedLabel text="{ResourceUtil.getInstance().getString('bbb.logout.confirm.title')}"
 						  styleName="titleWindowStyle"
 						  width="{this.width - 40}" />
-	
+
     <mx:Box width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
       <mx:Text text="{ResourceUtil.getInstance().getString('bbb.logout.confirm.message')}" />
     </mx:Box>
     <mx:HBox width="100%" horizontalAlign="center">
       <mx:Button id="confimButton" styleName="mainActionButton" label="{ResourceUtil.getInstance().getString('bbb.logout.confirm.yes')}" click="confirmButtonClickHandler()" />
-      <mx:Button id="endMeetingButton" label="{ResourceUtil.getInstance().getString('bbb.logout.confirm.endMeeting')}" click="endMeetingClickHandler()" />
+      <!--<mx:Button id="endMeetingButton" label="{ResourceUtil.getInstance().getString('bbb.logout.confirm.endMeeting')}" click="endMeetingClickHandler()" />-->
+      <mx:Button id="endMeetingButton" label="{ResourceUtil.getInstance().getString('bbb.logout.confirm.yes')}" click="endMeetingClickHandler()" />
       <mx:Button id="cancelButton" label="{ResourceUtil.getInstance().getString('bbb.logout.confirm.no')}" click="cancelButtonClickHandler()" />
    </mx:HBox>
 </mx:TitleWindow>

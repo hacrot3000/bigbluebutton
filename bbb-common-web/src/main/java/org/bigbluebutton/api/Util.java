@@ -12,17 +12,8 @@ public final class Util {
 
     //DuongTC: Change BBB slide folder
     public static String flattenToAscii(String string) {
-        char[] out = new char[string.length()];
         string = Normalizer.normalize(string, Normalizer.Form.NFD);
-        int j = 0;
-        for (int i = 0, n = string.length(); i < n; ++i) {
-            char c = string.charAt(i);
-            if (c <= '\u007F') {
-                out[j++] = c;
-            }
-        }
-        String o = new String(out);
-        return o.replaceAll("[^a-zA-Z0-9]", "-");
+        return string.replaceAll("[^a-zA-Z0-9]", "-");
     }
     //DuongTC: END Change BBB slide folder
 

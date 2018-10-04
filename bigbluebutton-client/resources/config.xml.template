@@ -74,7 +74,7 @@
 			showWebRTCMOS="false"
 			echoTestApp="9196"
 		/>
-
+<!--
 		<module name="VideoconfModule" url="http://HOST/client/VideoconfModule.swf?v=VERSION"
 			uri="rtmp://HOST/video"
 			dependsOn="UsersModule"
@@ -87,6 +87,13 @@
 			filterBias="0"
 			filterDivisor="4"
 			displayAvatar="false"
+			priorityRatio="0.67"
+		/>
+-->
+		<module name="WebrtcModule" url="http://HOST/client/WebrtcModule.swf?v=v0.02"
+			uri="rtmp://HOST/video"
+			dependsOn="UsersModule"
+			baseTabIndex="401"
 			priorityRatio="0.67"
 		/>
 

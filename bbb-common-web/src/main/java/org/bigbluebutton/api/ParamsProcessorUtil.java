@@ -319,24 +319,15 @@ public class ParamsProcessorUtil {
 
     //DuongTC: Change BBB slide folder
     public static String flattenToAscii(String string) {
-        char[] out = new char[string.length()];
-        string = Normalizer.normalize(string, Normalizer.Form.NFD);
-        int j = 0;
-        for (int i = 0, n = string.length(); i < n; ++i) {
-            char c = string.charAt(i);
-            if (c <= '\u007F') {
-                out[j++] = c;
-            }
-        }
-        String o = new String(out);
-        o = o.replaceAll("[^0-9]", "");
+	//Only allow number character
+        string = string.replaceAll("[^0-9]", "");
 
-        if (o.length() == 0)
+        if (string.length() == 0)
         {
-            o = "21291";
+            string = "21291";
         }
 
-        return o;
+        return string;
     }
     //DuongTC: END Change BBB slide folder
 
