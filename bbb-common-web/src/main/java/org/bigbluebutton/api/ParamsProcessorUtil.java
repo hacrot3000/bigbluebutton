@@ -445,10 +445,10 @@ public class ParamsProcessorUtil {
                 new Long(createTime).toString());
         /**/
 
-        //DuongTC: Add External metting ID for slide module
-        internalMeetingId = internalMeetingId.concat("-").concat(flattenToAscii(externalMeetingId));
+        //DuongTC: Add External metting ID for slide module: change internalMeetingId format
+        internalMeetingId = internalMeetingId.concat(new Long(createTime).toString()).concat("-").concat(flattenToAscii(externalMeetingId));
         log.warn("The new ID meeting=[{}] for externalId=[{}]", internalMeetingId, externalMeetingId);
-	//DuongTC: END Add External metting ID for slide module
+        //DuongTC: END Add External metting ID for slide module: change internalMeetingId format
 
         // If this create meeting request is for a breakout room, we just used
         // we need to generate a unique internal and external id and keep

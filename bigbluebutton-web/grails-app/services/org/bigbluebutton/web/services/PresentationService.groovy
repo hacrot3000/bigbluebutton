@@ -130,7 +130,9 @@ class PresentationService {
         }
         else
         {
-            return new File(getPresentationDir() + "globalblank/slide.svg")
+            //DuongTC: Show defaule blank for old dimdim slide
+            log.error "global blank " + getPresentationDir() + "../globalblank/slide.svg"
+            return new File(getPresentationDir() + "../globalblank/slide.svg")
         }
 	}
 
@@ -145,7 +147,9 @@ class PresentationService {
         }
         else
         {
-            return new File(getPresentationDir() + "globalblank/slide.swf")
+            //DuongTC: Show defaule blank for old dimdim slide
+            log.error "global blank " + getPresentationDir() + "../globalblank/slide.swf"
+            return new File(getPresentationDir() + "../globalblank/slide.swf")
         }
 
 	}
@@ -177,8 +181,9 @@ class PresentationService {
             }
             else
             {
-
-                return new File(getPresentationDir() + "globalblank/thumb.png")
+                //DuongTC: Show defaule blank for old dimdim slide
+                log.error "global blank " + getPresentationDir() + "../globalblank/slide.png"
+                return new File(getPresentationDir() + "../globalblank/thumb.png")
             }
         }
 	}
@@ -195,7 +200,9 @@ class PresentationService {
         }
         else
         {
-            return new File(getPresentationDir() + "globalblank/slide.txt")
+            //DuongTC: Show defaule blank for old dimdim slide
+            log.error "global blank " + getPresentationDir() + "../globalblank/slide.txt"
+            return new File(getPresentationDir() + "../globalblank/slide.txt")
         }
 	}
 //DuongTC: END Change BBB slide folder
