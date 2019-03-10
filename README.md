@@ -1,4 +1,4 @@
-Scops:
+Scopes:
  - We are a online languages school company (http://myngle.com) so we need BigBlueButton for our virtual class room
  - Each teacher have their own courses, each course has some presentation files (we called it is slides).
  - Every time teacher open BBB for a class, our system already know which course should be used and which slides should be pre-loaded.
